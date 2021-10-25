@@ -1,6 +1,6 @@
 # encoding: utf-8
 module ActsAsTaggableOn
-  class Tag < ::ActiveRecord::Base
+  class Tag < ::ApplicationRecord
     self.table_name = ActsAsTaggableOn.tags_table
 
     ### ASSOCIATIONS:
