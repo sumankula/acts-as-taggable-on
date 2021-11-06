@@ -8,5 +8,6 @@ group :local_development do
   gem 'appraisal'
   gem 'rake'
   gem 'sqlite3'
+  gem 'searchkick'
   gem 'byebug', platforms: [:mri]
 end
