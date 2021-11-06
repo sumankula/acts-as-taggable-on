@@ -3,7 +3,7 @@ module ActsAsTaggableOn
   class Tag < ApplicationRecord
     self.table_name = ActsAsTaggableOn.tags_table
 
-    include ::Searchable::Schema
+    
     ### ASSOCIATIONS:
 
     has_many :taggings, dependent: :destroy, class_name: '::ActsAsTaggableOn::Tagging'
@@ -14,11 +14,6 @@ module ActsAsTaggableOn
     validates_uniqueness_of :name, if: :validates_name_uniqueness?, case_sensitive: true
     validates_length_of :name, maximum: 255
 
-    searchkick index_name: tenant_index_name, callbacks: false, word_start: [:name], filterable: [
-            :account_id, :id, :name
-          ]
-    
-    
     # monkey patch this method if don't need name uniqueness validation
     def validates_name_uniqueness?
       true
