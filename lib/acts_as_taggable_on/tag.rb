@@ -3,16 +3,8 @@
 module ActsAsTaggableOn
   class Tag < ::ApplicationRecord
     self.table_name = ActsAsTaggableOn.tags_table
-    def self.tenant_index_name
-      name = if Shard.current
-               Shard.current.shard
-             else
-               # It should never enter this block except during migrations
-               connection_db_config.name
-             end
-      -> { [name, model_name.plural, Rails.env].join('_') }
-    end
-    searchkick index_name: tenant_index_name, callbacks: false, word_start: [:name], filterable: %i[
+
+    searchkick index_name: -> { ["global", model_name.plural, Rails.env].join("_") }, callbacks: false, word_start: [:name], filterable: %i[
       account_id id name
     ]
 
