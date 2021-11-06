@@ -4,10 +4,6 @@ module ActsAsTaggableOn
   class Tag < ::ApplicationRecord
     self.table_name = ActsAsTaggableOn.tags_table
 
-    searchkick index_name: -> { ["global", model_name.plural, Rails.env].join("_") }, callbacks: false, word_start: [:name], filterable: %i[
-      account_id id name
-    ]
-
     ### ASSOCIATIONS:
 
     has_many :taggings, dependent: :destroy, class_name: '::ActsAsTaggableOn::Tagging'
