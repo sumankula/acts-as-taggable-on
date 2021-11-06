@@ -3,6 +3,7 @@ module ActsAsTaggableOn
   class Tag < ApplicationRecord
     self.table_name = ActsAsTaggableOn.tags_table
 
+    include ::Searchable::Schema
     ### ASSOCIATIONS:
 
     has_many :taggings, dependent: :destroy, class_name: '::ActsAsTaggableOn::Tagging'
